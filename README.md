@@ -5,8 +5,7 @@ A responsive web application for Student Learning Path Recommendation System whe
 FastAPI for backend and PostgreSQL as database.
 React, Redux and TailwindCSS for frontend 
 
-![image](https://github.com/niweshbaraj/Coursify/assets/12951159/ab9a86b9-7be8-4e55-a0b8-9970599a2270)
-![image](https://github.com/niweshbaraj/Coursify/assets/12951159/bd6a2539-c40c-4730-9f29-26a38652d8b1)
+![image](https://github.com/niweshbaraj/Coursify/assets/12951159/ab9a86b9-7be8-4e55-a0b8-9970599a2270) ![image](https://github.com/niweshbaraj/Coursify/assets/12951159/bd6a2539-c40c-4730-9f29-26a38652d8b1)
 
 
 
