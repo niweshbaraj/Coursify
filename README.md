@@ -1,4 +1,5 @@
-# Recommendation-System
+# Coursify
+A Student Learning Path Recommendation System
 
 # Git commands
 
