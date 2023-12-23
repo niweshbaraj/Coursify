@@ -8,6 +8,8 @@ React, Redux and TailwindCSS for frontend
 ![image](https://github.com/niweshbaraj/Coursify/assets/12951159/ab9a86b9-7be8-4e55-a0b8-9970599a2270) 
 ![image](https://github.com/niweshbaraj/Coursify/assets/12951159/d6749c02-2c63-40b3-9340-32ef90d9d258)
 ![image](https://github.com/niweshbaraj/Coursify/assets/12951159/f55d822b-d5aa-46da-9bbb-0555c89fcc61)
+![image](https://github.com/niweshbaraj/Coursify/assets/12951159/9445c062-795c-4599-8d24-8c52efc71ea5)
+
 
 
 
