@@ -1,6 +1,14 @@
 # Coursify
 A Student Learning Path Recommendation System
 
+A responsive web application for Student Learning Path Recommendation System where students-admin-advisors-alumni can interact with the system to recommend/manage course paths for students. 
+FastAPI for backend and PostgreSQL as database.
+React, Redux and TailwindCSS for frontend 
+
+![image](https://github.com/niweshbaraj/Coursify/assets/12951159/ab9a86b9-7be8-4e55-a0b8-9970599a2270)
+
+
+
 # Git commands
 
 ## For cloning repository
