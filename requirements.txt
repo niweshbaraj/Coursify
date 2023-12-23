@@ -1,0 +1,12 @@
+fastapi
+fastapi_sqlalchemy
+uvicorn
+PyJWT
+pydantic
+typing
+psycopg2
+sqlalchemy-utils
+python-multipart
+pytest
+httpx
+python-dotenv

@@ -1,0 +1,2 @@
+username,name,password,gender,primary_email,secondary_email,cgpa,level,status,dob,address,city,state,pincode,country,contact,college,discipline,completion_year,college_address,college_city,college_state,college_pincode,college_country,employment_status,enrolled_courses,completed_courses
+nihal,nihal kumar,nihal,0,nihal@gmail.com,,9.1,1,1,22-10-2000,ashok nagar,patna,bihar,800020,india,7654164366,coc,maths,2021,kankarbagh,payna,bihar,800016,india,1,[cs101],[string]

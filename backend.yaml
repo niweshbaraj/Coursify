@@ -1,0 +1,1084 @@
+openapi: 3.0.2
+info:
+  title: Recommender System
+  description: |
+
+    The Recommender System API enables creation of application that can
+    provide students with learning path recommendations which can help
+    them to stay on track and make progress towards their educational goals.
+  version: 0.0.1
+paths:
+  /api/register:
+    post:
+      tags:
+        - user
+      summary: Registers a new user
+      operationId: register_api_register_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Register'
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              example: string
+        '409':
+          description: Conflict Error
+          content:
+            application/json:
+              example:
+                message: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              example:
+                message: string
+  /api/login:
+    post:
+      tags:
+        - user
+      summary: Login
+      operationId: login_api_login_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Login'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+              example:
+                id: 0
+                token: string
+        '401':
+          description: Authorization Error
+          content:
+            application/json:
+              example:
+                message: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              example:
+                message: string
+  /api/forget-password:
+    get:
+      tags:
+        - user
+      summary: Check if account exists for forget password
+      operationId: checkAccount_api_forget_password_get
+      parameters:
+        - required: true
+          schema:
+            title: Email
+          name: email
+          in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+              example: true
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              example:
+                message: string
+    put:
+      tags:
+        - user
+      summary: Change password
+      operationId: changePassword_api_forget_password_put
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ForgetPassword'
+        required: true
+      responses:
+        '202':
+          description: Successful Response
+          content:
+            application/json:
+              example: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                message: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              example:
+                message: string
+  /api/profile/{user_id}:
+    get:
+      tags:
+        - user
+      summary: Get user details
+      operationId: getUser_api_profile__user_id__get
+      parameters:
+        - required: true
+          schema:
+            title: User Id
+          name: user_id
+          in: path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+              example:
+                username: string
+                name: string
+                gender: 0
+                user_type: 0
+                primary_email: string
+                secondary_email: string
+                dob: '2020-04-13T00:00:00'
+                address: string
+                city: string
+                state: string
+                pincode: string
+                country: string
+                contact: string
+                profile_pic: string
+                college: string
+                discipline: string
+                completion_year: '2020-04-13T00:00:00'
+                college_address: string
+                college_city: string
+                college_state: string
+                college_pincode: string
+                employment_status: boolean
+                enrolled_courses: list
+                completed_courses: list
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              example:
+                message: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              example:
+                message: string
+      security:
+        - JWTBearer: []
+    put:
+      tags:
+        - user
+      summary: Update user details
+      operationId: updateUserDetails_api_profile__user_id__put
+      parameters:
+        - required: true
+          schema:
+            title: User Id
+          name: user_id
+          in: path
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      responses:
+        '202':
+          description: Successful Response
+          content:
+            application/json:
+              example: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                message: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              example:
+                message: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              example:
+                message: string
+      security:
+        - JWTBearer: []
+  /api/logout:
+    post:
+      tags:
+        - user
+      summary: Logout
+      operationId: logout_api_logout_post
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+              example: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              example:
+                message: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              example:
+                message: string
+      security:
+        - JWTBearer: []
+  /api/courses:
+    get:
+      tags:
+        - user
+      summary: Get all courses
+      operationId: getCourses_api_courses_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+              example:
+                - name: string
+                  course_id: string
+                  description: string
+                  duration: 0
+                  course_credit: 0
+                  is_project: true
+                  status: true
+                  level: 0
+                  avg_rating: 0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              example:
+                message: string
+  /api/courses/{course_id}:
+    get:
+      tags:
+        - user
+      summary: Get course details
+      operationId: getCourseDetails_api_courses__course_id__get
+      parameters:
+        - required: true
+          schema:
+            title: Course Id
+          name: course_id
+          in: path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+              example:
+                name: string
+                course_id: string
+                description: string
+                duration: 0
+                course_credit: 0
+                is_project: true
+                status: true
+                level: true
+                avg_rating: 0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              example:
+                message: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              example:
+                message: string
+    put:
+      tags:
+        - admin
+      summary: Update course details
+      operationId: updateCourseDetails_api_courses__course_id__put
+      parameters:
+        - required: true
+          schema:
+            title: Course Id
+          name: course_id
+          in: path
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Course'
+        required: true
+      responses:
+        '202':
+          description: Successful Response
+          content:
+            application/json:
+              example: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                message: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              example:
+                message: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              example:
+                message: string
+      security:
+        - JWTBearer: []
+  /api/admin/students:
+    get:
+      tags:
+        - admin
+      summary: Get details of all students
+      operationId: getStudents_api_admin_students_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+              example:
+                - name: string
+                  roll: string
+                  level: string
+                  status: 0
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              example:
+                message: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              example:
+                message: string
+      security:
+        - JWTBearer: []
+  /api/admin/students/{roll}:
+    get:
+      tags:
+        - admin
+      summary: Get details of a student
+      operationId: getStudentDetails_api_admin_students__roll__get
+      parameters:
+        - required: true
+          schema:
+            title: Roll
+          name: roll
+          in: path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+              example:
+                name: string
+                roll: string
+                level: string
+                status: 0
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              example:
+                message: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              example:
+                message: string
+      security:
+        - JWTBearer: []
+  /api/admin/add-students-template:
+    get:
+      tags:
+        - admin
+      summary: Get template file for students' Details
+      operationId: getStudentTemplate_api_admin_add_students_template_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+            text/csv:
+              example: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              example:
+                message: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              example:
+                message: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              example:
+                message: string
+      security:
+        - JWTBearer: []
+  /api/admin/add-students:
+    post:
+      tags:
+        - admin
+      summary: Add new student(s)
+      operationId: addStudents_api_admin_add_students_post
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: >-
+                #/components/schemas/Body_addStudents_api_admin_add_students_post
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+              example: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                message: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              example:
+                message: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              example:
+                message: string
+      security:
+        - JWTBearer: []
+  /api/admin/students-graph-data:
+    get:
+      tags:
+        - admin
+      summary: Get students' data for graphs
+      operationId: getStudentsData_api_admin_students_graph_data_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+              example:
+                n_rka: 0
+                n_active: 0
+                n_foundation: 0
+                n_diploma: 0
+                n_degree: 0
+                n_bs: 0
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              example:
+                message: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              example:
+                message: string
+      security:
+        - JWTBearer: []
+  /api/admin/add-courses-template:
+    get:
+      tags:
+        - admin
+      summary: Get template file for courses' Details
+      operationId: getCourseTemplate_api_admin_add_courses_template_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+            text/csv:
+              example: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              example:
+                message: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              example:
+                message: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              example:
+                message: string
+      security:
+        - JWTBearer: []
+  /api/admin/add-courses:
+    post:
+      tags:
+        - admin
+      summary: Add new course(s)
+      operationId: addCourses_api_admin_add_courses_post
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Body_addCourses_api_admin_add_courses_post'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+              example: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                message: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              example:
+                message: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              example:
+                message: string
+      security:
+        - JWTBearer: []
+  /api/admin/courses-graph-data:
+    get:
+      tags:
+        - admin
+      summary: Get courses' data for graphs
+      operationId: getCoursesData_api_admin_courses_graph_data_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+              example:
+                top_n_courses_based_on_students:
+                  - name: string
+                    course_id: string
+                    description: string
+                    duration: 0
+                    course_credit: 0
+                    is_project: true
+                    status: true
+                    level: true
+                    avg_rating: 0
+                top_n_courses_based_marks:
+                  - name: string
+                    course_id: string
+                    description: string
+                    duration: 0
+                    course_credit: 0
+                    is_project: true
+                    status: true
+                    level: true
+                    avg_rating: 0
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              example:
+                message: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              example:
+                message: string
+      security:
+        - JWTBearer: []
+  /api/advisor/recommendation-paths:
+    get:
+      tags:
+        - advisor
+      summary: Get all recommendation paths for approval
+      operationId: getPendingRecommendationPaths_api_advisor_recommendation_paths_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+              example:
+                - path_id: 0
+                  path:
+                    - - string
+                      - string
+                    - - string
+                      - string
+                      - string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              example:
+                message: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              example:
+                message: string
+      security:
+        - JWTBearer: []
+  /api/advisor/recommendation-path/{path_id}:
+    post:
+      tags:
+        - advisor
+      summary: Approve recommendation path
+      operationId: >-
+        approvePendingRecommendationPath_api_advisor_recommendation_path__path_id__post
+      parameters:
+        - required: true
+          schema:
+            title: Path Id
+          name: path_id
+          in: path
+      responses:
+        '204':
+          description: Successful Response
+          content:
+            application/json:
+              example: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              example:
+                message: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              example:
+                message: string
+      security:
+        - JWTBearer: []
+  /api/feedback/{course_id}:
+    post:
+      tags:
+        - student
+        - alumni
+      summary: Provide feedback
+      operationId: feedback_api_feedback__course_id__post
+      parameters:
+        - required: true
+          schema:
+            title: Course Id
+          name: course_id
+          in: path
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Feedback'
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              example: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              example:
+                message: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              example:
+                message: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              example:
+                message: string
+      security:
+        - JWTBearer: []
+  /api/recommendation-path:
+    post:
+      tags:
+        - student
+      summary: Get recommendation paths
+      operationId: getSuggestedPaths_api_recommendation_path_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecommendPaths'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+              example:
+                - path_id: 0
+                  path:
+                    - - string
+                      - string
+                    - - string
+                      - string
+                      - string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              example:
+                message: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              example:
+                message: string
+      security:
+        - JWTBearer: []
+  /api/recommendation-paths/status:
+    get:
+      tags:
+        - student
+      summary: Check status of recommendation paths
+      operationId: pathStatus_api_recommendation_paths_status_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+              example:
+                - path_id: 0
+                  path:
+                    - - string
+                      - string
+                    - - string
+                      - string
+                      - string
+                  status: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              example:
+                message: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              example:
+                message: string
+      security:
+        - JWTBearer: []
+components:
+  schemas:
+    Body_addCourses_api_admin_add_courses_post:
+      title: Body_addCourses_api_admin_add_courses_post
+      required:
+        - file
+      type: object
+      properties:
+        file:
+          title: File
+          type: string
+          format: binary
+    Body_addStudents_api_admin_add_students_post:
+      title: Body_addStudents_api_admin_add_students_post
+      required:
+        - file
+      type: object
+      properties:
+        file:
+          title: File
+          type: string
+          format: binary
+    Course:
+      title: Course
+      required:
+        - course_id
+        - name
+        - description
+        - duration
+        - course_credit
+        - is_project
+        - status
+        - level
+      type: object
+      properties:
+        course_id:
+          title: Course Id
+          type: string
+        name:
+          title: Name
+          type: string
+        description:
+          title: Description
+          type: string
+        duration:
+          title: Duration
+          type: integer
+        course_credit:
+          title: Course Credit
+          type: integer
+        is_project:
+          title: Is Project
+          type: boolean
+        status:
+          title: Status
+          type: boolean
+        level:
+          title: Level
+          type: integer
+    Feedback:
+      title: Feedback
+      required:
+        - feedback
+      type: object
+      properties:
+        feedback:
+          title: Feedback
+          type: string
+    ForgetPassword:
+      title: ForgetPassword
+      required:
+        - email
+        - new_password
+      type: object
+      properties:
+        email:
+          title: Email
+          type: string
+        new_password:
+          title: New Password
+          type: string
+    HTTPValidationError:
+      title: HTTPValidationError
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationError'
+    Login:
+      title: Login
+      required:
+        - email
+        - password
+      type: object
+      properties:
+        email:
+          title: Email
+          type: string
+        password:
+          title: Password
+          type: string
+    RecommendPaths:
+      title: RecommendPaths
+      required:
+        - n_hours
+      type: object
+      properties:
+        n_hours:
+          title: N Hours
+          type: integer
+    Register:
+      title: Register
+      required:
+        - username
+        - name
+        - password
+        - gender
+        - primary_email
+      type: object
+      properties:
+        username:
+          title: Username
+          type: string
+        name:
+          title: Name
+          type: string
+        password:
+          title: Password
+          type: string
+        gender:
+          title: Gender
+          type: integer
+        primary_email:
+          title: Primary Email
+          type: string
+    User:
+      title: User
+      required:
+        - username
+        - name
+        - password
+        - gender
+        - user_type
+        - primary_email
+        - secondary_email
+        - level
+        - status
+        - dob
+        - address
+        - city
+        - state
+        - pincode
+        - country
+        - contact
+        - profile_pic
+      type: object
+      properties:
+        username:
+          title: Username
+          type: string
+        name:
+          title: Name
+          type: string
+        password:
+          title: Password
+          type: string
+        gender:
+          title: Gender
+          type: integer
+        user_type:
+          title: User Type
+          type: integer
+        primary_email:
+          title: Primary Email
+          type: string
+        secondary_email:
+          title: Secondary Email
+          type: string
+        level:
+          title: Level
+          type: integer
+        status:
+          title: Status
+          type: boolean
+        dob:
+          title: Dob
+          type: string
+          format: date
+        address:
+          title: Address
+          type: string
+        city:
+          title: City
+          type: string
+        state:
+          title: State
+          type: string
+        pincode:
+          title: Pincode
+          type: string
+        country:
+          title: Country
+          type: string
+        contact:
+          title: Contact
+          type: string
+        profile_pic:
+          title: Profile Pic
+          type: string
+          format: binary
+    ValidationError:
+      title: ValidationError
+      required:
+        - loc
+        - msg
+        - type
+      type: object
+      properties:
+        loc:
+          title: Location
+          type: array
+          items:
+            anyOf:
+              - type: string
+              - type: integer
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string
+  securitySchemes:
+    JWTBearer:
+      type: http
+      scheme: bearer
